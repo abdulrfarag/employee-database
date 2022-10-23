@@ -1,0 +1,16 @@
+{
+  "name": "empolyee-tracker",
+  "version": "1.0.0",
+  "description": "empolyee cli",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abdul Farag",
+  "license": "ISC",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.4",
+    "mysql2": "^2.3.3"
+  }
+}
