@@ -12,5 +12,14 @@
     "console.table": "^0.10.0",
     "inquirer": "^8.2.4",
     "mysql2": "^2.3.3"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdulrfarag/employee-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abdulrfarag/employee-cli/issues"
+  },
+  "homepage": "https://github.com/abdulrfarag/employee-cli#readme"
 }
