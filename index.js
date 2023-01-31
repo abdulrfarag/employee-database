@@ -65,36 +65,39 @@ function loadMainChoices() {
 function addEmployee() {
   const sql = "SELECT * from role"
   db.query(sql, (err, res) => {
-    const roleChoices = res.map((role) => ({ value: role.id, name: role.title }))
+    const roleChoices = res.map((role) => ({ value: role.id, name: role.title, name: role.salary }))
     if (err) console.log(err)
-
-    const employeeSql = " SELECT * from employee"
-    db.query(employeeSql, (err, res) => {
-      const employeeChoices = res.map((employee) => ({ value: employee.id, name: `${employee.first_name} ${employee.last_name}` }))
-      if (err) console.log(err)
+    
       inquirer.prompt([{
         type: 'input',
-        name: "employeeFirst",
+        name: "first_name",
         message: "what is the employee's first name?",
       }, {
         type: 'input',
-        name: "employeeLast",
+        name: "last_name",
         message: "what is the employee's last name?",
       }, {
         type: 'list',
-        name: 'employeeRoleId',
-        message: "what is the employee's role?",
+        name: 'roleId',
+        message: "what is the new role?",
         choices: roleChoices,
       }, {
         type: 'list',
-        name: 'employeeManagerId',
-        message: "what is the employee's namager?",
-        choices: employeeChoices
-      }])
+        name: 'employeeId',
+        message: "who is the employee's manager?",
+        choices: roleChoices
+      }]).then ((answer)=>{
+        const sql = "INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES (?, ?, ? ,?)"
+        values =[answer.employeeFirstName, answer.employeeLastName, answer.roleId, answer.managerId]
+        db.query(sql, values, (err, res) => {
+          console.log(`${answer.employeeFirstName, answer.employeeLastName} employee added to the database`)
+          if (err) console.log(err)
+          loadMainChoices
+        })
+      })
     })
   }
-  )
-}
+
 
 function addRole() {
 
@@ -107,19 +110,18 @@ function addRole() {
 
     inquirer.prompt([{
       type: "input",
-      name: "roleTitle",
-      message: "what is the new roleTitle",
+      name: "role title",
+      message: "What is the name of the role?",
     }, {
       type: "input",
-      name: "roleSalary",
-      message: "what is the new roleSalary",
+      name: "role salary",
+      message: "What is the salary of the role?",
     }, {
       type: "list",
-      name: "departmentId",
-      message: "what is the new departmentId",
+      name: "department id",
+      message: "Which department does the role belong to?",
       choices: departmentChoices
     }]).then((answer) => {
-      // console.log(departmentChoices)
       const sql = "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)"
       values = [answer.roleTitle, answer.roleSalary, answer.departmentId]
       db.query(sql, values, (err, res) => {
