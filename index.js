@@ -70,6 +70,7 @@ function loadMainChoices() {
     })
 }
 
+// add Department
 function addDepartment() {
   inquirer
     .prompt([
@@ -92,6 +93,7 @@ function addDepartment() {
     });
 }
 
+// add Role
 function addRole() {
   const sql = "select * from department";
   db.query(sql, (err, res) => {
@@ -99,7 +101,7 @@ function addRole() {
       value: department.id,
       name: department.name,
     }));
-    // console.log(departmentChoices)
+   
     if (err) console.log(err);
 
     inquirer
@@ -135,80 +137,80 @@ function addRole() {
   })
 }
 // Add employees
-// function addEmployee() {
-//   const sql = "SELECT * from role";
-//   db.query(sql, (err, res) => {
-//     const roleChoices = res.map((role) => ({
-//       value: role.id,
-//       name: role.title,
-//     }));
-//     if (err) console.log(err);
-//     const sql = "select * from employee";
-//     db.query(sql, (err, res) => {
-//       const managerChoices = res.map((employee) => ({
-//         value: employee.id,
-//         name: employee.first_name,
-//         name: employee.last_name,
-//       }));
-//       if (err) console.log(err);
-//       inquirer
-//         .prompt([
-//           {
-//             type: "input",
-//             name: "first_name",
+function addEmployee() {
+  const sql = "SELECT * from role";
+  db.query(sql, (err, res) => {
+    const roleChoices = res.map((role) => ({
+      value: role.id,
+      name: role.title,
+    }));
+    if (err) console.log(err);
+    const sql = "select * from employee";
+    db.query(sql, (err, res) => {
+      const managerChoices = res.map((employee) => ({
+        value: employee.id,
+        name: employee.first_name,
+        name: employee.last_name,
+      }));
+      if (err) console.log(err);
+      inquirer
+        .prompt([
+          {
+            type: "input",
+            name: "first_name",
 
-//             message: "What is the employee's first name?",
-//           },
-//           {
-//             type: "input",
-//             name: "last_name",
+            message: "What is the employee's first name?",
+          },
+          {
+            type: "input",
+            name: "last_name",
 
-//             message: "What is the employee's last name?",
-//           },
-//           {
-//             type: "list",
-//             name: "role_id",
-//             type: "number",
-//             message: "What is the employee's role?",
-//             choices: roleChoices,
-//           },
-//           {
-//             type: "list",
-//             name: "manager_id",
-//             type: "number",
-//             message: "Who is the employee's manager?",
-//             choices: managerChoices,
-//           },
-//         ])
-//         .then((answers) => {
-//           db.query(
-//             "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
-//             [
-//               answers.first_name,
-//               answers.last_name,
-//               answers.role_id,
-//               answers.manager_id,
-//             ],
-//             function (err, data) {
-//               if (err) throw err;
-//               console.log(
-//                 "The new employee entered has been added successfully to the database."
-//               );
+            message: "What is the employee's last name?",
+          },
+          {
+            type: "list",
+            name: "role_id",
+            type: "number",
+            message: "What is the employee's role?",
+            choices: roleChoices,
+          },
+          {
+            type: "list",
+            name: "manager_id",
+            type: "number",
+            message: "Who is the employee's manager?",
+            choices: managerChoices,
+          },
+        ])
+        .then((answers) => {
+          db.query(
+            "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
+            [
+              answers.first_name,
+              answers.last_name,
+              answers.role_id,
+              answers.manager_id,
+            ],
+            function (err, data) {
+              if (err) throw err;
+              console.log(
+                "The new employee entered has been added successfully to the database."
+              );
 
-//               db.query(`SELECT * FROM employee`, (err, result) => {
-//                 if (err) {
-//                   res.status(500).json({ error: err.message });
-//                 }
-//                 console.table(result);
-//                 if (err) console.log(err);
-//                 loadMainChoices();
-//           }
-//         )
-//       })
-//   })}
-//   )
-// })
-// }
+              db.query(`SELECT * FROM employee`, (err, result) => {
+                if (err) {
+                  res.status(500).json({ error: err.message });
+                }
+                console.table(result);
+                if (err) console.log(err);
+                loadMainChoices();
+          }
+        )
+      })
+  })}
+  )
+})
+}
 // view employee
 function viewEmployee() {
   const sql = "select * from employee";
