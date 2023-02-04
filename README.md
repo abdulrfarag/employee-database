@@ -1,17 +1,17 @@
 # employee tracker
 
+manage emlpoyees data
+
 
 The following video shows the web application's appearance and functionality:
 
-![The weather app includes a search button to search for a city.](./Weather%20Dashboard%20(1).webm)
+![ app demo.](/Screenshot%202023-02-03%20232934.png)
+unfortunately cant get my sql to work to connect
 
 ## technologies
 
-JavaScript, node.js ,inquirer
+JavaScript, node.js ,inquirer, mysql
 
-## repo
+## repo code
 
-https://git@github.com:abdulrfarag/5-day-weather-app.git
-
-## live link 
-https://abdulrfarag.github.io/employee-cli/
+https://github.com/abdulrfarag/employee-database.git
