@@ -1,5 +1,5 @@
-# 5-day-weather-app
-5 day forecast 
+# employee tracker
+
 
 The following video shows the web application's appearance and functionality:
 
@@ -7,7 +7,7 @@ The following video shows the web application's appearance and functionality:
 
 ## technologies
 
-HTML, CSS, JAVASCRIPT
+JavaScript, node.js ,inquirer
 
 ## repo
 
